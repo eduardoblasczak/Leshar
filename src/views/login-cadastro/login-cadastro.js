@@ -1,80 +1,85 @@
-
-const userDatabase = [
-    { name: "Gustavo", email: "gustavo@gmail.com", password: "123" },
-    { name: "Eduardo", email: "eduardo@gmail.com", password: "123" },
-];
-
-
+// Selecionando os elementos do DOM
 const card = document.querySelector('.card');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const flipToRegisterLink = document.getElementById('flipToRegister');
 const flipToLoginLink = document.getElementById('flipToLogin');
 
+// --- CONTROLE DA ANIMAÇÃO DE VIRAR O CARD ---
 
 flipToRegisterLink.addEventListener('click', (event) => {
     event.preventDefault(); 
     card.classList.add('is-flipped');
 });
 
-
 flipToLoginLink.addEventListener('click', (event) => {
     event.preventDefault(); 
     card.classList.remove('is-flipped');
 });
 
+// --- LÓGICA DE LOGIN COM FETCH PARA O PHP ---
 
-loginForm.addEventListener('submit', (event) => {
+loginForm.addEventListener('submit', async (event) => {
     event.preventDefault(); 
 
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-    const resultadoSpan = document.getElementById('resultado');
+    
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
 
-    const foundUser = userDatabase.find(user => user.email === email && user.password === password);
-    const emailExists = userDatabase.some(user => user.email === email);
-    const passwordExists = userDatabase.some(user => user.password === password);
+    try {
+        const response = await fetch('login.php', {
+            method: 'POST',
+            body: formData
+        });
 
-    if (foundUser) {
-        resultadoSpan.textContent = `Login efetuado com sucesso! Bem-vindo, ${foundUser.name}!`;
-        resultadoSpan.className = 'resultado sucesso';
-    } else if (emailExists || passwordExists) {
-        resultadoSpan.textContent = 'Você acertou o email ou a senha, mas não ambos.';
-        resultadoSpan.className = 'resultado parcial';
-    } else {
-        resultadoSpan.textContent = 'Email ou senha inválidos!';
-        resultadoSpan.className = 'resultado erro';
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`Bem-vindo, ${result.user.name}!`);
+        } else {
+            alert(result.message);
+        }
+
+    } catch (error) {
+        console.error('Erro ao tentar fazer login:', error);
+        alert('Ocorreu um erro de comunicação com o servidor.');
     }
 });
 
-registerForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+// --- LÓGICA DE CADASTRO COM FETCH PARA O PHP ---
+
+registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
     const name = document.getElementById('registerName').value;
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
 
-  
-    if (!name || !email || !password) {
-        alert("Por favor, preencha todos os campos!");
-        return; 
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+
+    try {
+        const response = await fetch('cadastro.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+
+        alert(result.message);
+
+        if (result.success) {
+            registerForm.reset();
+            card.classList.remove('is-flipped');
+        }
+
+    } catch (error) {
+        console.error('Erro ao tentar cadastrar:', error);
+        alert('Ocorreu um erro de comunicação com o servidor.');
     }
-
-   
-    const userExists = userDatabase.some(user => user.email === email);
-    if (userExists) {
-        alert("Este email já está cadastrado. Tente fazer login.");
-        return; 
-    }
-
-    
-    const newUser = { name, email, password };
-    userDatabase.push(newUser);
-
-    alert("Cadastro realizado com sucesso! Você já pode fazer login.");
-    console.log("Banco de dados atualizado:", userDatabase);
-
-    
-    registerForm.reset();
-    card.classList.remove('is-flipped');
 });
