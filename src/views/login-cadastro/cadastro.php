@@ -4,9 +4,9 @@ header("Content-Type: application/json");
 
 
 $arquivoBD = 'users.json'; 
-$nome = $_POST['nome'] ?? '';
+$nome = $_POST['name'] ?? '';
 $email = $_POST['email'] ?? '';
-$senha = $_POST['senha'] ?? '';
+$senha = $_POST['password'] ?? '';
 
 if (empty($nome) || empty($email) || empty($senha)) {
     echo json_encode(['success' => false, 'message' => 'Preencha todos os campos.']);

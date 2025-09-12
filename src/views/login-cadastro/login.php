@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $arquivoBD = 'users.json';
 
 $email = $_POST['email'] ?? '';
-$senha = $_POST['senha'] ?? '';
+$senha = $_POST['password'] ?? '';
 
 if (empty($email) || empty($senha)) {
     echo json_encode(['success' => false, 'message' => 'Email e senha são obrigatórios.']);
