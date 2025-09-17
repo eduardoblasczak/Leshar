@@ -12,7 +12,7 @@
         const usuario = localStorage.getItem("usuarioLogado");
 
         if (!usuario) {
-            window.location.href = "index.html";
+            window.location.href = "../login-cadastro/login-cadastro.html";
         } else {
             const userObj = JSON.parse(usuario);
             document.getElementById("welcome").innerText = `Bem-vindo, ${userObj.name}!`;
