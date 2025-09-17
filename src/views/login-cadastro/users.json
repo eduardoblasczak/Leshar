@@ -8,5 +8,15 @@
         "nome": "123",
         "email": "123@123.com",
         "senha": "$2y$10$0sBc.ZMrcllr2IWxsRUdUOLI133zWw.HNg8OqKpk8dTgry7rF3q7O"
+    },
+    {
+        "nome": "vitor",
+        "email": "vitor@gmail.com",
+        "senha": "$2y$10$wfsdMfFAPD6G0yKH99YOeuntym.Xyq1ZpyC5EYPfiwg5WeKB0B1ku"
+    },
+    {
+        "nome": "molera",
+        "email": "molera@gmail.com",
+        "senha": "$2y$10$hmVGx3W9SqOr\/RtuXk6VSuqlw1L5Qcp0N0d3lC96tc4POQAKfYmOa"
     }
 ]

@@ -38,7 +38,11 @@ loginForm.addEventListener('submit', async (event) => {
         const result = await response.json();
 
         if (result.success) {
-            alert(`Bem-vindo, ${result.user.name}!`);
+            // Salvar no localStorage (pode salvar mais infos, se quiser)
+            localStorage.setItem("usuarioLogado", JSON.stringify(result.user));
+
+            // Redireciona para dashboard.html
+            window.location.href = "../dashboard-usuario/dashboard.html";
         } else {
             alert(result.message);
         }
