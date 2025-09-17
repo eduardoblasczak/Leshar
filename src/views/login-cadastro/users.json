@@ -3,5 +3,10 @@
         "nome": "Gustavo Giacoia",
         "email": "teste@teste.com",
         "senha": "$2y$10$UeGPGwyEBMiPBnKMg4CMCelIyxk7QYh8z16K\/dIbkGfcROjkQwm6G"
+    },
+    {
+        "nome": "123",
+        "email": "123@123.com",
+        "senha": "$2y$10$0sBc.ZMrcllr2IWxsRUdUOLI133zWw.HNg8OqKpk8dTgry7rF3q7O"
     }
 ]
