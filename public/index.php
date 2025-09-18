@@ -10,7 +10,7 @@
 <body>
     <main class="login-container">
         <div class="info-panel">
-            <img src="assets/media/logo.png" alt="Logo Leshar" class="logo">
+            <img src="/leshar/public/assets/media/logo.png" alt="Logo Leshar" class="logo">
         </div>
 
         <div class="card-container">
